@@ -1,0 +1,51 @@
+  private void Form3_FormClosing(object sender, FormClosingEventArgs e)
+  {
+      //DataTable dt = new DataTable();
+
+      DataTable dt = new DataTable();
+      dt.TableName = "Checkbox";
+
+      DataColumn dcmodel = new DataColumn("Model");
+      DataColumn dcanaly = new DataColumn("Analytical");
+      DataColumn dcanno = new DataColumn("Annotation");
+      DataColumn dccad = new DataColumn("CADImport");
+      DataColumn dcdoor = new DataColumn("Door");
+
+
+      dt.Columns.Add(dcmodel);
+      dt.Columns.Add(dcanaly);
+      dt.Columns.Add(dcanno);
+      dt.Columns.Add(dccad);
+      dt.Columns.Add(dcdoor);
+
+      dt.Rows.Add(this.chkbox_model.Checked.ToString());
+      dt.Rows.Add(this.chkbox_analytical.Checked.ToString());
+      dt.Rows.Add(this.chkbox_anno.Checked.ToString());
+      dt.Rows.Add(this.chk_cad_import.Checked.ToString());
+      dt.Rows.Add(this.chk_cad_import.Checked.ToString());
+
+      DataSet ds = new DataSet();
+      ds.DataSetName = "LockElementDetails";
+      ds.Tables.Add(dt);
+
+      string strFileName = "setting" + DateTime.Now.ToString("ddMMyyy") + ".xml";
+      string strWorkPath = System.IO.Path.Combine(@"C:\Users\prashant.chaturvedi\Documents\");
+      string strSettingsXmlFilePath = System.IO.Path.Combine(strWorkPath, strFileName);
+
+      ds.WriteXml(strSettingsXmlFilePath);
+
+      /*
+      if (ds.Tables.Count > 0)
+      {
+          ReadWriteXML(dt);
+          dt = null;
+      }*/
+
+     // GetWorkPath();
+      
+      //System.IO.File.AppendAllText(@"C:\Users\prashant.chaturvedi\Documents\AppFile.txt", this.chkbox_model.Checked.ToString());
+
+      //Properties.Settings.Default.Setting = chkbox_model.Checked.ToString();
+      //Properties.Settings.Default.Location = this.Location;
+      //Properties.Settings.Default.Save();
+  }
